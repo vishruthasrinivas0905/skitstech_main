@@ -21,7 +21,7 @@ before(async () => {
   baseUrl = `http://127.0.0.1:${port}`;
   processHandle = spawn(process.execPath, ['server/index.js'], { env: { ...process.env, PORT: String(port), MONGODB_URI: '' }, stdio: 'ignore' });
   for (let attempt = 0; attempt < 50; attempt += 1) {
-    try { if ((await fetch(`${baseUrl}/api/health`)).ok) return; } catch {}
+    try { if ((await fetch(`${baseUrl}/api/health`)).ok) return; } catch { }
     await new Promise((resolve) => setTimeout(resolve, 80));
   }
   throw new Error('Test server failed to start');
@@ -52,8 +52,9 @@ test('static home page contains the requested destinations', async () => {
   const response = await fetch(`${baseUrl}/`);
   assert.equal(response.status, 200);
   const html = await response.text();
-  for (const text of ['Our Legal Partners', 'IP TOOLS', 'WISDOM', 'CONTACT']) assert.ok(html.toLowerCase().includes(text.toLowerCase()), `missing ${text}`);
-  assert.match(html, /brand-text"><strong>S<span>K<\/span>LS<\/strong>/);
+  for (const text of ['About Us', 'IP Tools', 'Wiser', 'Contact']) assert.ok(html.toLowerCase().includes(text.toLowerCase()), `missing ${text}`);
+  assert.match(html, /Satatham <i>Kritam<\/i>/);
+  assert.match(html, /Innovative Technology Solutions/);
 });
 
 test('static client assets are served with the correct content types', async () => {
@@ -64,4 +65,12 @@ test('static client assets are served with the correct content types', async () 
   assert.match(stylesheet.headers.get('content-type'), /text\/css/);
   assert.match(favicon.headers.get('content-type'), /image\/svg\+xml/);
   assert.match(await stylesheet.text(), /\.hero-grid/);
+});
+
+test('every navigation page is served', async () => {
+  for (const page of ['about', 'services', 'innovation-ip-protection', 'brand-protection', 'mergers-acquisitions', 'data-protection-privacy', 'licensing-monetization', 'litigation-adr', 'other-allied-services', 'ip-tools', 'news', 'wiser', 'contact']) {
+    const response = await fetch(`${baseUrl}/${page}.html`);
+    assert.equal(response.status, 200, page);
+    assert.match(await response.text(), /primary-nav/);
+  }
 });

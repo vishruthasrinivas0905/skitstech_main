@@ -5,11 +5,15 @@
   "description": "SKLS LLP legal and intellectual property consultancy website",
   "type": "module",
   "scripts": {
-    "start": "node server/index.js",
-    "dev": "node --watch server/index.js",
+    "start": "node --env-file=.env server/index.js",
+    "dev": "node --watch --watch-path=./server --watch-path=./public --watch-path=./.env --env-file=.env server/index.js",
     "check": "node --check server/index.js && node --check public/js/app.js",
-  "test": "node --check server/index.js && node --check public/js/app.js && node --test"
+    "test": "node --check server/index.js && node --check public/js/app.js && node --test"
   },
-  "engines": { "node": ">=20" },
-  "dependencies": { "mongodb": "^6.8.0" }
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "mongodb": "^6.8.0"
+  }
 }

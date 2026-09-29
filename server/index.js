@@ -3,6 +3,8 @@ import { readFile, stat } from 'node:fs/promises';
 import { createReadStream } from 'node:fs';
 import { extname, join, normalize } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import dns from 'node:dns';
+dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 const root = join(fileURLToPath(new URL('..', import.meta.url)), 'public');
 const port = Number(process.env.PORT || 3000);
