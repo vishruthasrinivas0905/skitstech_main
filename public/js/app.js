@@ -1,3 +1,4 @@
+document.documentElement.classList.add('js');
 const menuButton = document.querySelector('.menu-toggle');
 const navigation = document.querySelector('.primary-nav');
 menuButton.addEventListener('click', () => {
@@ -29,10 +30,10 @@ document.querySelectorAll('[data-tool]').forEach((button) => button.addEventList
     result.hidden = !event.target.value;
   });
 }));
-document.querySelector('.dialog-close').addEventListener('click', () => dialog.close());
-dialog.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+document.querySelector('.dialog-close')?.addEventListener('click', () => dialog.close());
+dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
 
-document.querySelector('#listenQuote').addEventListener('click', (event) => {
+document.querySelector('#listenQuote')?.addEventListener('click', (event) => {
   const button = event.currentTarget;
   if (!('speechSynthesis' in window)) { button.innerHTML = '<span>▶</span> Audio not available <small></small>'; return; }
   if (speechSynthesis.speaking) { speechSynthesis.cancel(); button.setAttribute('aria-pressed', 'false'); button.innerHTML = '<span>▶</span> Listen to the thought <small>01:08</small>'; return; }
@@ -45,7 +46,7 @@ document.querySelector('#listenQuote').addEventListener('click', (event) => {
 
 const form = document.querySelector('#contactForm');
 const status = document.querySelector('#formStatus');
-form.addEventListener('submit', async (event) => {
+form?.addEventListener('submit', async (event) => {
   event.preventDefault();
   status.className = 'form-status';
   status.textContent = 'Sending your enquiry…';
@@ -60,6 +61,30 @@ form.addEventListener('submit', async (event) => {
     status.textContent = result.message;
     form.reset();
   } catch (error) {
-    status.textContent = error.message.includes('Failed to fetch') ? 'We could not reach the server. Please email sk@sklegal-solutions.com instead.' : error.message;
+    status.textContent = error.message.includes('Failed to fetch') ? 'We could not reach the server. Please use the email address on this page instead.' : error.message;
   }
 });
+
+document.querySelectorAll('.dd-toggle').forEach((b) => b.addEventListener('click', () => { const o = b.parentElement.classList.toggle('open'); b.setAttribute('aria-expanded', String(o)); }));
+document.addEventListener('click', (e) => document.querySelectorAll('.dd-wrap.open').forEach((w) => { if (!w.contains(e.target)) w.classList.remove('open'); }));
+const header = document.querySelector('.site-header');
+addEventListener('scroll', () => header.classList.toggle('scrolled', scrollY > 30), { passive: true });
+const show = (el) => el.classList.add('in');
+const reveal = 'IntersectionObserver' in window ? new IntersectionObserver((list) => list.forEach((x) => { if (x.isIntersecting) { show(x.target); reveal.unobserve(x.target); } }), { threshold: .12 }) : null;
+document.querySelectorAll('.reveal').forEach((el, i) => { el.style.transitionDelay = `${(i % 4) * 90}ms`; reveal ? reveal.observe(el) : show(el); });
+const counter = 'IntersectionObserver' in window ? new IntersectionObserver((list) => list.forEach((x) => {
+  if (!x.isIntersecting) return; counter.unobserve(x.target);
+  const end = Number(x.target.dataset.count); const t0 = performance.now();
+  const tick = (t) => { const p = Math.min((t - t0) / 1600, 1); x.target.textContent = Math.round(end * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+}), { threshold: .5 }) : null;
+document.querySelectorAll('[data-count]').forEach((el) => counter ? counter.observe(el) : (el.textContent = el.dataset.count));
+try {
+  if (!sessionStorage.getItem('disclaimerOk')) {
+    const d = document.createElement('dialog'); d.className = 'disc';
+    d.innerHTML = '<h3>Disclaimer</h3><p>As per the rules of the Bar Council of India, we are not permitted to solicit work or advertise in any manner. By proceeding and clicking “I Agree”, the user acknowledges that the transmission, receipt or use of information on this website does not amount to solicitation, advertisement, inducement or personal communication of any sort so as to create an attorney-client relationship.</p><p>The information provided is not legal advice. Satatham Kritam Innovative Technology Solutions Private Limited disclaims all liability arising from reliance on the contents of this website.</p><button class="button button-light" style="background:#071426;color:#fff">I Agree</button>';
+    document.body.append(d); d.showModal();
+    d.querySelector('button').addEventListener('click', () => { sessionStorage.setItem('disclaimerOk', '1'); d.close(); });
+    d.addEventListener('cancel', (e) => e.preventDefault());
+  }
+} catch {}
