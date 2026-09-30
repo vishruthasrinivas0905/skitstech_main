@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: skitstech
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeployTrigger: commit
+    domains:
+      - skitstech.com
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false
+      - key: MONGODB_DB
+        value: skls_website
+      - key: ALLOWED_ORIGIN
+        value: https://skitstech.com

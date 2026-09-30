@@ -86,6 +86,16 @@ The API validates basic required fields and length limits. For a public producti
 
 ## Production deployment
 
+### Render + skitstech.com
+
+This repository includes a `render.yaml` Blueprint for a Node web service. In Render, choose **New > Blueprint**, connect `vishruthasrinivas0905/skitstech_main`, and apply the Blueprint. Render will build with `npm ci`, start with `npm start`, check `/api/health`, and attach `skitstech.com` (which also enables the `www` alias/redirect in Render). Enter the MongoDB Atlas connection string when Render asks for `MONGODB_URI`; without it, contact form submissions are held only in memory and disappear on restart.
+
+After the first deploy, open the service's **Settings > Custom Domains** and follow Render's displayed DNS instructions at the domain's DNS provider. DNS values depend on Render's current target for the service, so copy the values shown in the dashboard rather than guessing. Wait for domain verification and TLS provisioning, then check `https://skitstech.com/api/health` and submit a test contact form. The site also remains available at its generated `*.onrender.com` address.
+
+The app listens on Render's injected `PORT`. Keep MongoDB credentials in Render's environment settings, not in Git. The service can also be created manually as a Node web service using build command `npm ci`, start command `npm start`, and health check path `/api/health`.
+
+For Render's current setup steps, see [Blueprints](https://render.com/docs/infrastructure-as-code), [Node deployment](https://render.com/docs/deploy-node-express-app), and [custom domains](https://render.com/docs/custom-domains).
+
 ### Container host + Cloudflare (recommended for this Node/MongoDB build)
 
 1. Create a MongoDB Atlas cluster, a database user with access only to the target database, and an IP/network access rule appropriate to your app host. Do not use broad public database access in production if the host supports fixed egress IPs or private networking.
