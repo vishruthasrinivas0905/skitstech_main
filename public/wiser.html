@@ -49,59 +49,69 @@
                     SKITS.</p>
             </div>
         </section>
-        <section class="section">
+        <section class="section wiser-launch">
             <div class="container">
                 <div class="section-kicker"><span>FLAGSHIP PLATFORM</span><span class="kicker-line"></span></div>
-                <h2 class="display-heading reveal">WISER: What is Strategically and Essentially Required.</h2>
-                <div class="split">
-                    <div class="reveal">
-                        <p>WISER is one of SKITS’ flagship AI-driven innovation-intelligence platforms, conceived as an
-                            end-to-end platform for idea capture, novelty assessment, global technology and patent
-                            searches, IP generation, product and market intelligence and commercialisation strategy.</p>
-                        <p>It moves beyond conventional keyword-based searches toward semantic and contextual
-                            intelligence, connecting novelty assessment with IP strategy, compliance intelligence,
-                            product development and commercial planning.</p>
-                        <p>WISER will accelerate research and IP generation, protection, commercialisation, and
-                            regulatory compliance of individuals, startups, educational institutions, enterprises, and
-                            PSUs.</p>
-                    </div>
-                    <div class="reveal">
-                        <ol class="flow flow-vertical" aria-label="WISER workflow">
-                            <li>Understanding the idea</li>
-                            <li>Innovation discovery</li>
-                            <li>Novelty assessment</li>
-                            <li>IP documentation</li>
-                            <li>Product and market intelligence</li>
-                            <li>Commercialisation strategy</li>
-                        </ol>
-                    </div>
-                </div>
+                <h2 class="display-heading reveal">From an idea to protectable, commercial innovation.</h2>
+                <p class="wiser-intro reveal">WiSER reads an idea in whatever form it already exists, checks how novel it
+                    really is against global patent and research sources, shapes it into structured intellectual
+                    property, and maps how to build and commercialise it &mdash; in one connected place, instead of five
+                    disconnected vendors.</p>
+                <ul class="wiser-stats reveal" aria-label="WiSER at a glance">
+                    <li><strong>8</strong><span>stage pipeline, idea to commercialisation</span></li>
+                    <li><strong>6</strong><span>capabilities, from novelty to expert review</span></li>
+                    <li><strong>5</strong><span>purpose-built intelligence models</span></li>
+                    <li><strong>5M+</strong><span>indexed patent records</span></li>
+                </ul>
+                <a class="wiser-link-card reveal" href="https://sk-delta-nine.vercel.app/#platform" target="_blank"
+                    rel="noopener noreferrer" aria-label="Open the WiSER platform website in a new tab">
+                    <span class="wiser-link-text">
+                        <small>EXPLORE THE PLATFORM</small>
+                        <b>Visit the WiSER website</b>
+                        <em>See the live pipeline, sample outputs, architecture and who it is built for.</em>
+                        <i>sk-delta-nine.vercel.app</i>
+                    </span>
+                    <span class="wiser-link-arrow" aria-hidden="true">&#8599;</span>
+                </a>
             </div>
         </section>
-        <section class="section wisdom-section" id="wisdom">
-            <div class="container wisdom-layout">
-                <div>
-                    <div class="section-kicker"><span>07 / WISDOM</span><span class="kicker-line"></span><span>THOUGHTS
-                            TO TAKE WITH YOU</span></div>
-                    <h2 class="display-heading">Knowledge is<br />the <em>beginning.</em></h2>
-                    <p>Perspectives on intellectual property, innovation and the decisions that shape meaningful work.
-                    </p><a href="/contact.html" class="inline-link">Start a conversation <span>↗</span></a>
-                </div>
-                <div class="wisdom-quote reveal"><span class="quote-mark">“</span>
-                    <blockquote>Jñānam paramam balam.</blockquote>
-                    <p>Knowledge is the supreme strength.</p><span class="quote-rule"></span>
-                    <blockquote class="quote-secondary">“There is nothing more purifying than knowledge in this world.”
-                    </blockquote><small>— BHAGAVAD GITA 4.38</small><button class="listen-button" id="listenQuote"
-                        aria-pressed="false"><span>▶</span> Listen to the thought <small>01:08</small></button>
-                </div>
-            </div>
-        </section>
-        <section class="cta-band">
-            <div class="container">
-                <h2 class="reveal">Good ideas deserve good counsel.</h2><a class="button button-light"
-                    href="/contact.html">Get in touch <span>↗</span></a>
-            </div>
-        </section>
+        <style>
+            .wiser-intro { max-width: 60em; margin: 0 0 2rem; font-size: 1.1rem; line-height: 1.7; }
+            .wiser-stats { list-style: none; margin: 0 0 2.5rem; padding: 0; display: grid;
+                grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--main-color-4);
+                border: 1px solid var(--main-color-4); }
+            .wiser-stats li { background: var(--main-color-3); padding: 1.4rem 1.25rem; display: flex;
+                flex-direction: column; gap: .4rem; }
+            .wiser-stats strong { font-family: var(--serif-font); font-size: 2.4rem; line-height: 1;
+                color: var(--cta-color-6); font-weight: 500; }
+            .wiser-stats span { color: var(--main-color-8); font-size: .92rem; line-height: 1.4; }
+            .wiser-link-card { display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+                padding: 2.25rem 2.5rem; text-decoration: none; color: #fff;
+                background: linear-gradient(120deg, var(--main-color-3), var(--main-color-2));
+                border: 1px solid var(--cta-color-5); position: relative; overflow: hidden;
+                transition: border-color .25s ease, transform .25s ease, background .25s ease; }
+            .wiser-link-card::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 5px;
+                background: var(--cta-color-6); }
+            .wiser-link-card:hover, .wiser-link-card:focus-visible { border-color: var(--cta-color-6);
+                transform: translateY(-3px); background: linear-gradient(120deg, var(--main-color-4), var(--main-color-3)); }
+            .wiser-link-text { display: flex; flex-direction: column; gap: .5rem; }
+            .wiser-link-text small { letter-spacing: .18em; color: var(--cta-color-6); font-weight: 600; }
+            .wiser-link-text b { font-family: var(--serif-font); font-size: clamp(1.5rem, 3vw, 2.2rem);
+                font-weight: 500; line-height: 1.15; }
+            .wiser-link-text em { font-style: normal; color: var(--main-color-8); max-width: 42em; line-height: 1.5; }
+            .wiser-link-text i { font-style: normal; color: var(--cta-color-5); font-size: .9rem;
+                text-decoration: underline; text-underline-offset: 3px; }
+            .wiser-link-arrow { flex: 0 0 auto; width: 4.5rem; height: 4.5rem; border-radius: 50%; display: grid;
+                place-items: center; font-size: 1.9rem; background: var(--cta-color-6); color: var(--main-color-1);
+                transition: transform .25s ease; }
+            .wiser-link-card:hover .wiser-link-arrow, .wiser-link-card:focus-visible .wiser-link-arrow {
+                transform: rotate(45deg); }
+            @media (max-width: 800px) {
+                .wiser-stats { grid-template-columns: repeat(2, 1fr); }
+                .wiser-link-card { padding: 1.75rem 1.5rem 1.75rem 1.75rem; gap: 1rem; }
+                .wiser-link-arrow { width: 3.25rem; height: 3.25rem; font-size: 1.4rem; }
+            }
+        </style>
     </main>
     <footer class="site-footer">
         <div class="container fm">
