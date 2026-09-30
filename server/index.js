@@ -76,10 +76,11 @@ async function handle(request, response) {
   try {
     const info = await stat(target);
     if (!info.isFile()) throw new Error('Not a file');
-    const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.json': 'application/json; charset=utf-8', '.webmanifest': 'application/manifest+json' }[extname(target)] || 'application/octet-stream';
+    const mime = { '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8', '.js': 'text/javascript; charset=utf-8', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg', '.webp': 'image/webp', '.avif': 'image/avif', '.gif': 'image/gif', '.ico': 'image/x-icon', '.woff2': 'font/woff2', '.json': 'application/json; charset=utf-8', '.webmanifest': 'application/manifest+json' }[extname(target)] || 'application/octet-stream';
     response.writeHead(200, { 'Content-Type': mime, 'X-Content-Type-Options': 'nosniff', 'Referrer-Policy': 'strict-origin-when-cross-origin' });
     createReadStream(target).pipe(response);
   } catch {
+    if (extname(pathname) && extname(pathname) !== '.html') return send(response, 404, 'Not found', 'text/plain; charset=utf-8');
     const html = await readFile(join(root, 'index.html'), 'utf8');
     send(response, 200, html, 'text/html; charset=utf-8');
   }

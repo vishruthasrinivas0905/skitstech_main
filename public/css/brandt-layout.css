@@ -1,0 +1,983 @@
+/* Brandt layout + motion layer (loads after brandt-theme.css). Content untouched. */
+@keyframes bt-marquee {
+  from {
+    transform: translateX(100%)
+  }
+
+  to {
+    transform: translateX(-100%)
+  }
+}
+
+@keyframes bt-kb {
+  to {
+    transform: scale(1.12)
+  }
+}
+
+@keyframes bt-fade {
+  from {
+    opacity: 0;
+    transform: translateY(24px)
+  }
+
+  to {
+    opacity: 1;
+    transform: none
+  }
+}
+
+:root {
+  --bt-ease: cubic-bezier(.075, .82, .165, 1)
+}
+
+/* ---- Home hero: full-screen image, centered big heading at bottom (Brandt home-hero) ---- */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 0
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  animation: bt-kb 26s ease-in-out infinite alternate
+}
+
+.hero::before {
+  z-index: 2;
+  background: linear-gradient(180deg, rgba(26, 24, 41, .55), rgba(26, 24, 41, .15) 40%, var(--main-color-2) 100%) !important
+}
+
+.hero-grid {
+  grid-template-columns: 1fr !important;
+  min-height: 0 !important;
+  padding-top: 12em;
+  padding-bottom: 3.5em;
+  z-index: 10
+}
+
+.hero-copy {
+  text-align: center;
+  max-width: 80em;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6em;
+  padding: 0 !important
+}
+
+.hero-copy .eyebrow {
+  justify-content: center;
+  opacity: .8
+}
+
+.hero h1 {
+  margin: 0;
+  line-height: 1 !important;
+  font-size: clamp(40px, 7vw, 116px) !important;
+  font-weight: 300
+}
+
+.hero-copy>p {
+  max-width: 34em;
+  margin: 0;
+  text-align: center
+}
+
+.hero-actions {
+  justify-content: center;
+  gap: 2.5em;
+  flex-wrap: wrap
+}
+
+.hero-proof {
+  justify-content: center;
+  border-top: 1px solid var(--main-color-4);
+  padding-top: 1.5em;
+  width: 100%;
+  max-width: 40em
+}
+
+.hero-art {
+  position: absolute;
+  right: 3em;
+  top: 9em;
+  width: 17em;
+  height: auto;
+  z-index: 11;
+  display: block
+}
+
+.hero-art .art-card {
+  position: relative;
+  inset: auto;
+  width: 100%;
+  margin-bottom: 1em
+}
+
+.hero-bottom {
+  z-index: 11;
+  border-top: 1px solid var(--main-color-4)
+}
+
+/* ---- Inner page hero (Brandt compact-hero): centered, tall, image behind ---- */
+.page-hero {
+  min-height: 62vh;
+  display: flex;
+  align-items: flex-end;
+  text-align: center;
+  padding: 14em 0 6em
+}
+
+.page-hero .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5em
+}
+
+.page-hero p {
+  max-width: 34em;
+  margin: 0 auto
+}
+
+.page-hero::after {
+  background: linear-gradient(180deg, transparent, var(--main-color-2)) !important;
+  opacity: 1
+}
+
+/* ---- Section headings centered like Brandt .section-content ---- */
+main>.section {
+  padding: 8em 0
+}
+
+main>.section .section-kicker {
+  justify-content: center
+}
+
+main>.section .display-heading,
+.cta-band h2 {
+  text-align: center
+}
+
+.section-heading-row {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5em
+}
+
+.section-heading-row>p {
+  max-width: 34em;
+  margin-inline: auto
+}
+
+.split,
+.about-layout,
+.wisdom-layout,
+.faq-layout,
+.contact-layout {
+  gap: 5em;
+  align-items: center
+}
+
+/* ---- Image cards: photo fills card, translucent brown caption bar (Brandt blog/team items) ---- */
+.photo-trio,
+.news-grid,
+.tools-grid,
+.vm-grid {
+  gap: 2em
+}
+
+.photo-trio>*,
+.news-card,
+.profile-card,
+.tool-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--main-color-4);
+  border-radius: 0
+}
+
+.photo-trio>* {
+  min-height: 30em;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end
+}
+
+.photo-trio img,
+.news-card img,
+.profile-photo,
+.photo,
+.figure img {
+  transition: transform 1.4s var(--bt-ease), filter .6s;
+  will-change: transform
+}
+
+.photo-trio>*:hover img,
+.news-card:hover img,
+.profile-card:hover .profile-photo,
+.split:hover .photo {
+  transform: scale(1.08)
+}
+
+.photo-trio img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1
+}
+
+.photo-trio>*>*:not(img) {
+  position: relative;
+  z-index: 5;
+  background: var(--brown-transparent-bg);
+  backdrop-filter: blur(10px);
+  color: var(--main-color-1);
+  padding: 1.5em;
+  margin: 0;
+  transition: padding .5s var(--bt-ease), background-color .2s
+}
+
+.photo-trio>*:hover>*:not(img) {
+  background: var(--cta-color-6);
+  padding-block: 2.2em
+}
+
+.photo-trio * {
+  color: inherit
+}
+
+.photo-trio>* h3,
+.photo-trio>* p {
+  color: var(--main-color-1)
+}
+
+/* ---- Practice areas -> Brandt numbered service rows ---- */
+.practice-grid {
+  grid-template-columns: 1fr !important;
+  border-left: 0;
+  border-right: 0
+}
+
+.practice-card {
+  display: grid;
+  grid-template-columns: 5em 1fr 2fr auto;
+  gap: 2em;
+  align-items: center;
+  min-height: 0;
+  padding: 2.5em 1em;
+  border: 0;
+  border-bottom: 1px solid var(--main-color-4);
+  transition: padding .5s var(--bt-ease), background-color .2s
+}
+
+.practice-card:hover {
+  padding-block: 3.4em;
+  background: var(--main-color-3)
+}
+
+.practice-icon,
+.card-arrow {
+  position: static
+}
+
+.practice-number {
+  font: 200 3em/1 var(--serif-font) !important;
+  color: var(--main-color-9) !important;
+  letter-spacing: 0 !important
+}
+
+@media(max-width:800px) {
+  .practice-card {
+    grid-template-columns: 3em 1fr
+  }
+
+  .practice-card>*:nth-child(n+3) {
+    grid-column: 2
+  }
+}
+
+/* ---- Counters, ticker, CTA ---- */
+.counter-grid strong {
+  font-size: clamp(40px, 4.5vw, 72px)
+}
+
+.ticker {
+  overflow: hidden;
+  height: auto;
+  padding: 1em 0
+}
+
+.ticker-track {
+  animation: bt-marquee 38s linear infinite;
+  justify-content: flex-start;
+  width: max-content;
+  font: 200 clamp(20px, 3.2vw, 50px)/1.1 var(--serif-font);
+  text-transform: uppercase;
+  gap: .6em
+}
+
+.ticker-track i {
+  font-size: .5em
+}
+
+.cta-band {
+  padding: 4em 0;
+  text-align: center
+}
+
+.cta-band .container {
+  flex-direction: column;
+  align-items: center;
+  gap: 1.4em;
+  text-align: center
+}
+
+.cta-band h2 {
+  font-size: clamp(24px, 3.2vw, 46px) !important;
+  line-height: 1.15
+}
+
+/* ---- Buttons/links: arrow slides on hover ---- */
+.button {
+  transition: background-color .2s, padding .5s var(--bt-ease)
+}
+
+.button:hover {
+  padding-inline: 36px
+}
+
+.text-link,
+.inline-link {
+  transition: padding .8s var(--bt-ease), color .2s
+}
+
+.text-link:hover,
+.inline-link:hover {
+  padding-right: 8px
+}
+
+/* ---- Footer: large serif link rows with arrow (Brandt footer-2) ---- */
+.site-footer {
+  padding: 48px 0 0;
+  font-size: 14px;
+  line-height: 1.6
+}
+
+.site-footer .fm {
+  grid-template-columns: 1.3fr 1.15fr .65fr .65fr;
+  gap: 2em 2.5em;
+  padding-bottom: 36px
+}
+
+.site-footer .fm-col {
+  gap: 10px
+}
+
+.site-footer .fm-col a {
+  font-size: 15px;
+  line-height: 1.5;
+  padding: 0 1.3em 0 0;
+  background: url(/assets/brandt/arrow-right-brown.svg) 0 55%/.65em no-repeat;
+  background-position: calc(100% - 0px) 55%;
+  transition: background-position .3s, border-color .2s, color .2s
+}
+
+.site-footer .fm-col a:hover {
+  background-position: 100% 55%
+}
+
+.site-footer .fm-col h3 {
+  font-size: 12px !important;
+  letter-spacing: .14em;
+  margin: 0 0 6px;
+  opacity: .8
+}
+
+/* ---- Scroll-reveal / image reveal (driven by brandt-motion.js) ---- */
+.js .bt-up {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s var(--bt-ease), transform 1.1s var(--bt-ease)
+}
+
+.js .bt-up.in {
+  opacity: 1;
+  transform: none
+}
+
+/* Image reveal uses opacity + the independent 'scale' property (NOT clip-path: a fully clipped img is never
+   'visible', so lazy-loading and IntersectionObserver never fired and images stayed blank). 'transform'
+   stays free for the hover zoom below. */
+.js .bt-img {
+  opacity: 0;
+  scale: 1.12;
+  transition: opacity 1.1s var(--bt-ease), scale 1.6s var(--bt-ease), transform 1.4s var(--bt-ease), filter .6s
+}
+
+.js .bt-img.in {
+  opacity: 1;
+  scale: 1
+}
+
+.reveal {
+  transition-timing-function: var(--bt-ease) !important
+}
+
+@media(max-width:1000px) {
+  .hero-art {
+    display: none
+  }
+
+  .site-footer .fm {
+    grid-template-columns: 1fr 1fr
+  }
+
+  .site-footer .fm-brand,
+  .site-footer .fc-col {
+    grid-column: 1/-1
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+
+  .js .bt-up,
+  .js .bt-img {
+    opacity: 1;
+    transform: none;
+    scale: 1;
+    transition: none
+  }
+
+  .ticker-track,
+  .hero-bg {
+    animation: none
+  }
+}
+
+/* ==========================================================================
+   Fixes: images / overlaps / Brandt fidelity  (appended - safe to merge)
+   ========================================================================== */
+
+/* Body copy fell back to Times if Noto Sans is slow/blocked - use a sans fallback like the Brandt CSS intends */
+:root {
+  --sans-font: "Noto Sans", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --serif-font: "Fraunces", "Fraunces Variable", Georgia, "Times New Roman", serif
+}
+
+/* ---- Hero: local fallback background so the hero is never empty if the remote photo fails ---- */
+.hero {
+  background: var(--main-color-2) url(/assets/hero-fallback.svg) center/cover no-repeat
+}
+
+.hero-bg {
+  opacity: 1;
+  z-index: 1;
+  inset: -4% 0 0 0;
+  height: 108%
+}
+
+/* extra height so the parallax never exposes an edge */
+.hero-copy .eyebrow,
+.hero h1,
+.hero-copy>p,
+.hero-actions,
+.hero-proof {
+  position: relative;
+  z-index: 12
+}
+
+/* ---- Hero side cards: were sitting on top of the H1. Anchor bottom-right, clear of the centred copy ---- */
+.hero-art {
+  top: auto;
+  bottom: 7.5em;
+  right: 3em;
+  width: 15em;
+  min-height: 0
+}
+
+.hero-art .hero-photo {
+  display: none
+}
+
+.hero-art .art-card {
+  margin-bottom: .8em
+}
+
+@media(max-width:1500px) {
+  .hero-art {
+    display: none
+  }
+}
+
+/* ---- Hero proof strip: stop the narrow wrapped column ---- */
+.hero-proof {
+  width: auto;
+  max-width: none;
+  gap: 1.6em;
+  flex-wrap: nowrap;
+  margin-top: 1em
+}
+
+.hero-proof p {
+  white-space: nowrap;
+  flex: none;
+  font-size: 14px;
+  text-align: left
+}
+
+@media(max-width:600px) {
+  .hero-proof {
+    flex-wrap: wrap;
+    justify-content: center
+  }
+
+  .hero-proof p {
+    white-space: normal
+  }
+}
+
+/* ---- Ticker: marquee started fully off-screen (blank band). Loop the duplicated set seamlessly ---- */
+@keyframes bt-marquee {
+  from {
+    transform: translateX(0)
+  }
+
+  to {
+    transform: translateX(-50%)
+  }
+}
+
+.ticker-track {
+  padding-right: .6em
+}
+
+/* ---- About / split: Brandt uses square, flat images. Remove the rounded/shadow/float + double-hover jitter ---- */
+.figure,
+.figure.photo {
+  border-radius: 0;
+  box-shadow: none;
+  animation: none
+}
+
+.figure:hover {
+  transform: none
+}
+
+.split:hover .photo,
+.profile-card:hover .profile-photo {
+  transform: none
+}
+
+/* standalone images have no clipping wrapper: zooming them spilled over neighbours */
+.figure.photo {
+  width: 100%;
+  height: 100%;
+  min-height: 22em;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border: 1px solid var(--main-color-4)
+}
+
+.profile-photo,
+.news-card img,
+.photo,
+.figure img {
+  border-radius: 0
+}
+
+.profile-card {
+  align-items: stretch
+}
+
+.profile-photo {
+  aspect-ratio: 3/4;
+  height: 100%
+}
+
+/* ---- Three-photo band: caption text was gold on tan (unreadable); square Brandt cards ---- */
+.photo-trio>* {
+  border-radius: 0;
+  aspect-ratio: auto
+}
+
+.photo-trio figcaption {
+  inset: auto
+}
+
+.photo-trio figcaption b {
+  font-family: var(--serif-font);
+  font-weight: 500;
+  font-size: 1.5em;
+  color: var(--main-color-1)
+}
+
+.photo-trio figcaption span {
+  color: var(--main-color-1);
+  opacity: .8;
+  font-size: 1em
+}
+
+/* ---- News cards: image full-bleed, text padded and painted above the zooming image ---- */
+.news-card {
+  padding: 0;
+  border-top: 1px solid var(--main-color-4);
+  background: var(--main-color-3)
+}
+
+.news-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3/2;
+  margin: 0;
+  object-fit: cover
+}
+
+.news-card>*:not(img) {
+  position: relative;
+  z-index: 2;
+  background: var(--main-color-3);
+  margin: 0;
+  padding-inline: 1.5em
+}
+
+.news-card .news-meta {
+  padding-top: 1.4em;
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+  font-size: 12px
+}
+
+.news-card h3 {
+  padding-top: .6em;
+  font-size: clamp(20px, 1.8vw, 28px)
+}
+
+.news-card p {
+  padding-bottom: .6em;
+  min-height: 0;
+  font-size: 16px
+}
+
+.news-card>a {
+  display: block;
+  padding-bottom: 1.6em;
+  font-size: 14px;
+  color: var(--cta-color-6)
+}
+
+.news-card:hover img {
+  transform: scale(1.05)
+}
+
+/* ---- Practice rows: 5 children were placed in a 4-column grid, dropping the arrow onto its own row ---- */
+.practice-card {
+  grid-template-columns: 4em 2.2em minmax(0, 1fr) minmax(0, 1.6fr) 2em;
+  gap: 1.6em
+}
+
+.practice-card>p {
+  color: var(--main-color-9);
+  max-width: none;
+  font-size: 16px
+}
+
+.practice-card .card-arrow {
+  justify-self: end;
+  color: var(--cta-color-6)
+}
+
+@media(max-width:800px) {
+  .practice-card {
+    grid-template-columns: 3em 1fr 2em
+  }
+
+  .practice-card>.practice-icon {
+    display: none
+  }
+
+  .practice-card>h3,
+  .practice-card>p {
+    grid-column: 2
+  }
+
+  .practice-card>.card-arrow {
+    grid-column: 3;
+    grid-row: 1
+  }
+}
+
+/* ---- Body copy colours: mixed blue/gold text on dark sections -> Brandt light lavender / white ---- */
+.checks li,
+.section-heading-row p,
+.about-copy p,
+.wisdom-layout p,
+.faq-layout p,
+.partner-inner p,
+.split p {
+  color: var(--main-color-9)
+}
+
+.checks li strong {
+  color: #fff;
+  font-weight: 600
+}
+
+.checks li::before {
+  color: var(--cta-color-6)
+}
+
+/* ---- Inner-page hero: layered background so a failed remote photo falls back to the local artwork ---- */
+.page-hero {
+  background: linear-gradient(180deg, rgba(26, 24, 41, .45), rgba(26, 24, 41, .8)), var(--bg, none) center/cover no-repeat, url(/assets/hero-fallback.svg) center/cover no-repeat, var(--main-color-1)
+}
+
+.page-hero::after {
+  display: none
+}
+
+.page-hero .container {
+  position: relative;
+  z-index: 2
+}
+
+.page-hero h1 {
+  font-size: clamp(34px, 5vw, 80px) !important;
+  text-align: center
+}
+
+.page-hero .crumbs {
+  justify-content: center
+}
+
+/* ---- Brandt: cards square, no bounce ---- */
+.news-card:hover,
+.team-card:hover,
+.tool-card:hover {
+  transform: none;
+  box-shadow: none
+}
+
+/* ---- Never let anything push the page sideways ---- */
+html,
+body {
+  overflow-x: clip
+}
+
+img {
+  max-width: 100%
+}
+
+.photo-trio figure {
+  border-radius: 0;
+  aspect-ratio: auto
+}
+
+.photo-trio figure figcaption b {
+  color: var(--main-color-1)
+}
+
+.photo-trio figure figcaption span {
+  color: var(--main-color-1);
+  opacity: .85
+}
+
+/* Footer contact column: arrows were forcing address/phone/email to wrap one word per line */
+.site-footer .fm-col a {
+  display: block;
+  max-width: 100%;
+  overflow-wrap: anywhere
+}
+
+@media(max-width:600px) {
+  .site-footer {
+    padding-top: 36px
+  }
+
+  .site-footer .fm {
+    grid-template-columns: 1fr 1fr;
+    gap: 1.6em 1.2em;
+    padding-bottom: 24px
+  }
+
+  .site-footer .fm-brand,
+  .site-footer .fc-col {
+    grid-column: 1/-1
+  }
+}
+
+/* Mobile header: long logo text pushed the hamburger off-screen */
+@media(max-width:900px) {
+  .nav-wrap {
+    gap: 12px
+  }
+
+  .brand {
+    min-width: 0;
+    flex: 1 1 auto
+  }
+
+  .logo-text {
+    min-width: 0
+  }
+
+  .logo-text b,
+  .logo-text small {
+    white-space: normal;
+    overflow-wrap: anywhere;
+    line-height: 1.25
+  }
+
+  .menu-toggle {
+    flex: none
+  }
+}
+
+/* Hero bottom bar: three items collided on small screens */
+@media(max-width:700px) {
+  .hero-bottom {
+    height: auto;
+    padding-block: 1em;
+    justify-content: center
+  }
+
+  .hero-bottom>span {
+    display: none
+  }
+
+  .hero-bottom .scroll-cue {
+    font-size: 11px
+  }
+}
+
+/* ==========================================================================
+   Round 2: smaller ticker / CTA / footer, logo in partner map, IP Tools buttons
+   (kept in this file only, so nothing tracked by main is touched)
+   ========================================================================== */
+
+/* ---- Partner map: SKITS logo in the centre instead of the "SK ITS" text ---- */
+.map-center {
+  width: 104px;
+  height: 104px;
+  font-size: 0;
+  line-height: 0;
+  color: transparent;
+  background: var(--main-color-1) url(/assets/logo-mark.png) center/58% auto no-repeat;
+  border: 1px solid var(--cta-color-6);
+  box-shadow: 0 0 0 8px var(--cta-transparent-10)
+}
+
+.map-center span {
+  display: none
+}
+
+/* ---- Footer details ---- */
+.site-footer .fm-brand .logo-mark {
+  height: 52px
+}
+
+.site-footer .logo-text b {
+  font-size: 15px
+}
+
+.site-footer .logo-text small {
+  font-size: 12px
+}
+
+.site-footer .fm-tag {
+  font-size: 17px;
+  line-height: 1.35;
+  margin: 20px 0 18px
+}
+
+.site-footer .back-top {
+  font-size: 13px;
+  padding: 9px 20px;
+  letter-spacing: .06em
+}
+
+/* contact details are plain text rows: no arrow, so address / email / phone use the full column width */
+.site-footer .fc-col a {
+  background: none;
+  padding-right: 0;
+  overflow-wrap: normal;
+  word-break: normal
+}
+
+.site-footer .fb-inner {
+  padding: 16px 0;
+  font-size: 13px;
+  gap: 8px 24px
+}
+
+.site-footer .legal-note {
+  width: min(var(--container), calc(100% - 64px));
+  padding: 16px 0 24px;
+  font-size: 12px;
+  line-height: 1.7
+}
+
+@media(min-width:1000px) {
+  .site-footer .legal-note {
+    font-size: 12px
+  }
+}
+
+.site-footer .legal-note p {
+  font-size: inherit;
+  line-height: inherit
+}
+
+/* theme forces every <p> to >=16px */
+@media(max-width:900px) {
+  .site-footer .legal-note {
+    width: calc(100% - 40px)
+  }
+}
+
+@media(max-width:600px) {
+  .site-footer .fb-inner {
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 12px
+  }
+
+  .site-footer .legal-note {
+    width: calc(100% - 32px);
+    font-size: 11.5px
+  }
+}
+
+/* ---- IP Tools: button label was peach on a peach pill (.inline-link colour beat .tool-button) ---- */
+.tool-button.inline-link,
+.tool-button.inline-link:visited {
+  color: var(--main-color-1);
+  border: 1px solid var(--cta-color-5);
+  padding: 10px 24px;
+  font-size: 16px;
+  line-height: 1.3
+}
+
+.tool-button.inline-link:hover {
+  color: var(--main-color-1);
+  background: var(--cta-color-7);
+  border-color: var(--cta-color-7);
+  padding-right: 24px
+}
+
+.tool-button.inline-link span {
+  color: var(--main-color-1)
+}
