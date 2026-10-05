@@ -79,12 +79,3 @@ const counter = 'IntersectionObserver' in window ? new IntersectionObserver((lis
   requestAnimationFrame(tick);
 }), { threshold: .5 }) : null;
 document.querySelectorAll('[data-count]').forEach((el) => counter ? counter.observe(el) : (el.textContent = el.dataset.count));
-try {
-  if (!sessionStorage.getItem('disclaimerOk')) {
-    const d = document.createElement('dialog'); d.className = 'disc';
-    d.innerHTML = '<h3>Disclaimer</h3><p>As per the rules of the Bar Council of India, we are not permitted to solicit work or advertise in any manner. By proceeding and clicking “I Agree”, the user acknowledges that the transmission, receipt or use of information on this website does not amount to solicitation, advertisement, inducement or personal communication of any sort so as to create an attorney-client relationship.</p><p>The information provided is not legal advice. Satatham Kritam Innovative Technology Solutions Private Limited disclaims all liability arising from reliance on the contents of this website.</p><button class="button button-light" style="background:#071426;color:#fff">I Agree</button>';
-    document.body.append(d); d.showModal();
-    d.querySelector('button').addEventListener('click', () => { sessionStorage.setItem('disclaimerOk', '1'); d.close(); });
-    d.addEventListener('cancel', (e) => e.preventDefault());
-  }
-} catch {}
