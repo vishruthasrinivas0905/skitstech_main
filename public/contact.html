@@ -18,6 +18,61 @@
     <link rel="stylesheet" href="/css/site.css" />
     <link rel="stylesheet" href="/css/brandt-theme.css" />
 <link rel="stylesheet" href="/css/brandt-layout.css" />
+<style>
+    .contact-section { padding: clamp(4rem, 8vw, 7rem) 0; }
+    .contact-section .contact-layout {
+        grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+        align-items: start;
+        gap: clamp(2rem, 6vw, 5rem);
+    }
+    .contact-section .contact-layout > div:first-child { padding-top: .65rem; }
+    .contact-section .display-heading {
+        margin: 1.4rem 0 1rem;
+        font-size: clamp(2.6rem, 4.5vw, 4rem);
+        line-height: 1.08;
+    }
+    .contact-layout > div:first-child > p { max-width: 28rem; font-size: 1rem; line-height: 1.75; }
+    .contact-details { gap: 1.2rem; margin-top: 2rem; }
+    .contact-details a { font-size: .95rem; line-height: 1.55; overflow-wrap: anywhere; }
+    .contact-details span { margin-bottom: .3rem; font-size: .68rem; }
+    .contact-form {
+        padding: clamp(1.4rem, 3vw, 2.25rem);
+        border-radius: 1rem;
+        box-shadow: 0 24px 65px rgba(0, 0, 0, .22);
+    }
+    .contact-form .form-top { padding-bottom: 1rem; margin-bottom: 1.35rem; font-size: .68rem; }
+    .contact-form label { gap: .55rem; margin: 1.1rem 0; font-size: .9rem; line-height: 1.45; }
+    .contact-form label small { font-size: .75rem; }
+    .contact-form input, .contact-form select {
+        min-height: 48px;
+        padding: .75rem 1rem;
+        font-size: 1rem;
+    }
+    .contact-form .form-row { gap: 1rem; }
+    .contact-form textarea[name="message"] {
+        min-height: 160px;
+        padding: 1rem;
+        font-size: 16px;
+        line-height: 1.6;
+    }
+    .contact-form textarea[name="message"]::placeholder { font-size: 15px; line-height: 1.5; }
+    .contact-form .consent { align-items: center; gap: .7rem; font-size: .8rem; line-height: 1.5; }
+    .contact-form .consent input { min-height: 16px; width: 16px; height: 16px; padding: 0; }
+    .contact-form .submit-button { margin-top: .5rem; }
+    .contact-form .form-privacy { margin-top: .9rem; font-size: .75rem; line-height: 1.55; }
+    @media (max-width: 900px) {
+        .contact-section .contact-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+        .contact-section .contact-layout > div:first-child { padding-top: 0; }
+        .contact-section .contact-layout > div:first-child > p { max-width: 38rem; }
+    }
+    @media (max-width: 600px) {
+        .contact-section { padding: 3.5rem 0; }
+        .contact-section .display-heading { font-size: clamp(2.3rem, 10vw, 3rem); }
+        .contact-form .form-row { grid-template-columns: 1fr; gap: 0; }
+        .contact-form { padding: 1.25rem; }
+        .contact-form .form-top { gap: .8rem; font-size: .58rem; }
+    }
+</style>
 </head>
 
 <body>
@@ -45,7 +100,7 @@
             <div class="container">
                 <div class="crumbs"><a href="/">HOME</a> / CONTACT</div>
                 <h1>Contact</h1>
-                <p>[Tell us what you are working on.]</p>
+                <p>A considered next step starts with a conversation.</p>
             </div>
         </section>
         <section class="contact-section" id="contact">
@@ -67,8 +122,8 @@
                         name<input name="name" autocomplete="name" required maxlength="120"
                             placeholder="How should we address you?" /></label>
                     <div class="form-row"><label>Email address<input name="email" type="email" autocomplete="email"
-                                required maxlength="254" placeholder="you@company.com" /></label><label>Phone
-                            <small>(optional)</small><input name="phone" type="tel" autocomplete="tel" maxlength="40"
+                                required maxlength="254" placeholder="you@company.com" /></label><label><span>Phone
+                            <small>(optional)</small></span><input name="phone" type="tel" autocomplete="tel" maxlength="40"
                                 placeholder="+91" /></label></div><label>What can we help with?<select name="service">
                             <option value="">Choose a topic (optional)</option>
                             <option>Patents & innovation</option>
