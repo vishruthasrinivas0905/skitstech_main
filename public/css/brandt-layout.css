@@ -981,6 +981,7 @@ img {
 .tool-button.inline-link span {
   color: var(--main-color-1)
 }
+
 /* ==========================================================================
    Round 3: bigger logo, two-card photo band, FAQ padding, About-page text style
    (appended as one block so it merges cleanly)
@@ -1073,4 +1074,10 @@ img {
   font-weight: 300;
   line-height: 1.7;
   color: var(--main-color-9)
+}
+
+/* Footer: space between the logo and the BACK TO TOP button */
+.site-footer .fm-brand .back-top {
+  display: inline-block;
+  margin-top: 28px
 }
