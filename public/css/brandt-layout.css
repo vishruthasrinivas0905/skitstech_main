@@ -981,3 +981,96 @@ img {
 .tool-button.inline-link span {
   color: var(--main-color-1)
 }
+/* ==========================================================================
+   Round 3: bigger logo, two-card photo band, FAQ padding, About-page text style
+   (appended as one block so it merges cleanly)
+   ========================================================================== */
+
+/* ---- Logo mark clearly larger than the company name beside it (header + footer, incl. scrolled state) ---- */
+.site-header .logo-mark,
+.site-header.scrolled .logo-mark,
+.site-header .brand:hover .logo-mark {
+  height: 62px;
+  width: auto
+}
+
+.site-header .logo-text b {
+  font-size: 13px
+}
+
+.site-footer .fm-brand .logo-mark {
+  height: 76px;
+  width: auto
+}
+
+.site-footer .logo-text b {
+  font-size: 15px
+}
+
+@media(max-width:900px) {
+
+  .site-header .logo-mark,
+  .site-header.scrolled .logo-mark {
+    height: 52px
+  }
+
+  .site-header .logo-text b {
+    font-size: 12px
+  }
+
+  .site-footer .fm-brand .logo-mark {
+    height: 64px
+  }
+}
+
+/* ---- Home photo band now has two cards ---- */
+.photo-trio {
+  grid-template-columns: repeat(2, 1fr)
+}
+
+@media(max-width:900px) {
+  .photo-trio {
+    grid-template-columns: 1fr
+  }
+}
+
+/* ---- "Good to know": proper inner padding for questions, answers and the + icon ---- */
+.faq-list details {
+  padding: 0
+}
+
+.faq-list summary {
+  padding: 22px 28px;
+  gap: 24px
+}
+
+.faq-list summary span {
+  flex: none;
+  line-height: 1
+}
+
+.faq-list details p {
+  margin: 0;
+  max-width: none;
+  padding: 0 28px 24px
+}
+
+@media(max-width:600px) {
+  .faq-list summary {
+    padding: 18px 20px;
+    gap: 16px
+  }
+
+  .faq-list details p {
+    padding: 0 20px 20px
+  }
+}
+
+/* ---- About page: Core proposition uses the same font style as Vision and Mission ---- */
+.vm-card.vm-wide p {
+  font-family: var(--sans-font);
+  font-size: max(16px, 1.05em);
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--main-color-9)
+}
